@@ -102,7 +102,7 @@ jobs:
       # Step 11: Copy the code (sync repository to the server)
       - name: Copy code
         run: |
-          rsync -ae "ssh -o UserKnownHostsFile=./known_hosts -p $PORT" --delete-after --exclude=.git ./ $USER@$HOST:/srv/app/
+          rsync -ae "ssh -o UserKnownHostsFile=./known_hosts -p $PORT" --exclude=.git ./ $USER@$HOST:/srv/app/
 
       # Step 12: Apply Supervisor and Nginx changes (reload services)
       - name: Apply changes
