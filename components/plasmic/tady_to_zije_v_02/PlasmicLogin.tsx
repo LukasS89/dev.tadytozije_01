@@ -302,27 +302,6 @@ function PlasmicLogin__RenderFunc(props: {
                         onFinish: async values => {
                           const $steps = {};
 
-                          $steps["runActionOnLogin"] = true
-                            ? (() => {
-                                const actionArgs = {};
-                                return (({ tplRef, action, args }) => {
-                                  return $refs?.[tplRef]?.[action]?.(
-                                    ...(args ?? [])
-                                  );
-                                })?.apply(null, [actionArgs]);
-                              })()
-                            : undefined;
-                          if (
-                            $steps["runActionOnLogin"] != null &&
-                            typeof $steps["runActionOnLogin"] === "object" &&
-                            typeof $steps["runActionOnLogin"].then ===
-                              "function"
-                          ) {
-                            $steps["runActionOnLogin"] = await $steps[
-                              "runActionOnLogin"
-                            ];
-                          }
-
                           $steps["goToHomepage"] = true
                             ? (() => {
                                 const actionArgs = { destination: `/` };
@@ -388,7 +367,7 @@ function PlasmicLogin__RenderFunc(props: {
                           <FormItemWrapper
                             className={classNames(
                               "__wab_instance",
-                              sty.formField__uyof2
+                              sty.formField__rWh3
                             )}
                             label={"P\u0159ihla\u0161ovac\u00ed e-mail"}
                             name={"email"}
@@ -405,7 +384,7 @@ function PlasmicLogin__RenderFunc(props: {
                           <FormItemWrapper
                             className={classNames(
                               "__wab_instance",
-                              sty.formField__cKsJ9
+                              sty.formField__xx8WL
                             )}
                             label={"Heslo"}
                             name={"password"}
@@ -432,7 +411,7 @@ function PlasmicLogin__RenderFunc(props: {
                               className={classNames(
                                 projectcss.all,
                                 projectcss.__wab_text,
-                                sty.text__uof4A
+                                sty.text__gcj0Z
                               )}
                             >
                               {"P\u0159ihl\u00e1sti se"}
