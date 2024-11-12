@@ -35,6 +35,7 @@ jobs:
             --exclude=.git \
             --exclude=next.config.mjs \
             --exclude=pages/plasmic-host.tsx \
+            --exclude=tsconfig.json \
             ./ $USER@$HOST:/srv/app/
 
       # Step 5: Run the build command on the server
