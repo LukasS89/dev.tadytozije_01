@@ -42,7 +42,11 @@ jobs:
       # Step 6: Copy code (sync repository to the server)
       - name: Copy code
         run: |
-          rsync -ae "ssh -o UserKnownHostsFile=./known_hosts -p $PORT" --exclude=.git ./ $USER@$HOST:/srv/app/
+          rsync -ae "ssh -o UserKnownHostsFile=./known_hosts -p $PORT" \
+            --exclude=.git \
+            --exclude=next.config.mjs \
+            --exclude=pages/plasmic-host.tsx \
+            ./ $USER@$HOST:/srv/app/
 
       # Step 7: Run the build command on the server
       - name: Run build on server
