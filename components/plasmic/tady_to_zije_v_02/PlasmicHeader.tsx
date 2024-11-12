@@ -350,6 +350,7 @@ function PlasmicHeader__RenderFunc(props: {
               };
               return __composite;
             })()}
+            trigger={"hover"}
           >
             <AntdButton
               data-plasmic-name={"button"}
