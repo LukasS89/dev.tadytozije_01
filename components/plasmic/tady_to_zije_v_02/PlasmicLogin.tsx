@@ -62,7 +62,14 @@ import {
 import Header from "../../Header"; // plasmic-import: uZX7p1wyVbCa/component
 import { FormWrapper } from "@plasmicpkgs/antd5/skinny/Form";
 import { formHelpers as FormWrapper_Helpers } from "@plasmicpkgs/antd5/skinny/Form";
-import { Login } from "../../Login"; // plasmic-import: 5Ay7Fc19l469/codeComponent
+
+// Conditionally import Login server-side only
+let Login;
+
+if (typeof window === 'undefined') {
+  Login = require('../../Login').Login; // Import server-side only
+}
+
 import { FormItemWrapper } from "@plasmicpkgs/antd5/skinny/FormItem";
 import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
@@ -76,6 +83,7 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css";
 import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: 7YxWRrh3dN23tQ7PqjX2hp/projectcss
 import sty from "./PlasmicLogin.module.css"; // plasmic-import: PlUFaVq0OU9N/css
+
 
 createPlasmicElementProxy;
 
