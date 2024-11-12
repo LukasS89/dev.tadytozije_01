@@ -2,7 +2,7 @@ name: Deploy into Roští.cz
 
 on:
   workflow_run:
-    workflows: ["Sync, build and deploy Plasmic app"]  # Replace with your Plasmic workflow name
+    workflows: ["Sync, build and deploy Plasmic app"] # Replace with your Plasmic workflow name
     types:
       - completed
 
@@ -29,39 +29,49 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.ROSTI_DEPLOY_SSH_KEY }}
 
-      # Step 4: Setup hostkey to prevent connection issues
+      # Step 4: Setup SSH known hosts to prevent connection issues
       - name: Setup hostkey
         run: |
           echo "ssh.rosti.cz ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDUsNXCnANkKPlxYe//zFpV+N0s4Ay+2SEg8bTj+7iIJM8XbLviBYx0dIRb2DVD7kKjmIjCLijd6Pmn6g17jbGDUB/CMrJ+A+XcyDZYvGUDGzt0QcUksFoSFqJQo3u/MLr2pa3eyO34zfOS6M6nTCIvp48iNzQAdc5B9ziEaUbxiuiVru7UMVr2Rv12sFSarRacXCE4URsetXuZ077AzJ67ZKJYH1gU6QCk4qal8R9xrkDep4LmFSUTr1oKiNaLTJlrZ69N9+A+hJX6XdpZ7dIke+NbLaqTWJZq+esGQmF+SdsGoVtBM+8aQPyazxSJAQOB+j4pbOGrLlZFhfS6tqzx" > ./known_hosts
 
       # Step 5: Set environment variables (from GitHub Secrets)
-      - name: env
+      - name: Set environment variables
         run: |
           cat << EOF > .env
           ${{ secrets.ENV }}
           EOF
 
-      # Step 6: Sync files to the server (without excluding node_modules)
-      - name: Copy code
-        run: |
-          rsync -ae "ssh -o UserKnownHostsFile=./known_hosts -p $PORT" --exclude=.git --exclude="components/Login.tsx" ./ $USER@$HOST:/srv/app/
-
-      # Step 7: Install dependencies on the server
+      # Step 6: Install dependencies on the server (node_modules)
       - name: Install dependencies on the server
         run: |
           ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST 'cd /srv/app && npm install'
 
+      # Step 7: Verify working directory on the server
+      - name: Verify working directory
+        run: |
+          ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST 'pwd && ls -la /srv/app'
+
       # Step 8: Build the application (Create production build)
-      - name: Build on the server
+      - name: Build the app on the server
         run: |
           ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST 'cd /srv/app && npm run build'
 
-      # Step 9: Setup Node.js on the server
+      # Step 9: Check Node.js version on the server
+      - name: Check Node.js version on the server
+        run: |
+          ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST 'node -v'
+
+      # Step 10: Setup Node.js on the server
       - name: Setup Node.js
         run: |
-          ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST /usr/local/bin/rosti node $NODE_VERSION
+          ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST '/usr/local/bin/rosti node $NODE_VERSION'
 
-      # Step 10: Configure Supervisor to manage the app process
+      # Step 11: Sync code to the server
+      - name: Sync code to the server
+        run: |
+          rsync -ae "ssh -o UserKnownHostsFile=./known_hosts -p $PORT" --exclude=.git --exclude="components/Login.tsx" ./ $USER@$HOST:/srv/app/
+
+      # Step 12: Setup Supervisor to manage the app process
       - name: Setup Supervisord
         run: |
           cat << EOF > rosti.app.conf
@@ -83,7 +93,7 @@ jobs:
           scp -o UserKnownHostsFile=./known_hosts -P $PORT rosti.app.conf $USER@$HOST:/srv/conf/supervisor.d/app.conf
           rm rosti.app.conf
 
-      # Step 11: Configure Nginx for reverse proxy
+      # Step 13: Setup Nginx for reverse proxy
       - name: Setup Nginx
         run: |
           cat << EOF > rosti.nginx.conf
@@ -104,8 +114,8 @@ jobs:
           scp -o UserKnownHostsFile=./known_hosts -P $PORT rosti.nginx.conf $USER@$HOST:/srv/conf/nginx.d/app.conf
           rm rosti.nginx.conf
 
-      # Step 12: Apply Supervisor and Nginx changes (reload services)
-      - name: Apply changes
+      # Step 14: Apply Supervisor and Nginx changes (reload services)
+      - name: Apply Supervisor and Nginx changes
         run: |
           ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST supervisorctl reread
           ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST supervisorctl restart app
