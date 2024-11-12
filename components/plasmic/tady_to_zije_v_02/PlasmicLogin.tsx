@@ -336,6 +336,33 @@ function PlasmicLogin__RenderFunc(props: {
                               "runActionOnForm"
                             ];
                           }
+
+                          $steps["goToHomepage"] = true
+                            ? (() => {
+                                const actionArgs = { destination: `/` };
+                                return (({ destination }) => {
+                                  if (
+                                    typeof destination === "string" &&
+                                    destination.startsWith("#")
+                                  ) {
+                                    document
+                                      .getElementById(destination.substr(1))
+                                      .scrollIntoView({ behavior: "smooth" });
+                                  } else {
+                                    __nextRouter?.push(destination);
+                                  }
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["goToHomepage"] != null &&
+                            typeof $steps["goToHomepage"] === "object" &&
+                            typeof $steps["goToHomepage"].then === "function"
+                          ) {
+                            $steps["goToHomepage"] = await $steps[
+                              "goToHomepage"
+                            ];
+                          }
                         },
                         onFinishFailed: async data => {
                           const $steps = {};
@@ -401,7 +428,7 @@ function PlasmicLogin__RenderFunc(props: {
                           <FormItemWrapper
                             className={classNames(
                               "__wab_instance",
-                              sty.formField__x3SVq
+                              sty.formField__vhGeV
                             )}
                             label={"P\u0159ihla\u0161ovac\u00ed e-mail"}
                             name={"email"}
@@ -418,7 +445,7 @@ function PlasmicLogin__RenderFunc(props: {
                           <FormItemWrapper
                             className={classNames(
                               "__wab_instance",
-                              sty.formField___8LQnq
+                              sty.formField___9Wwj8
                             )}
                             label={"Heslo"}
                             name={"password"}
@@ -457,7 +484,7 @@ function PlasmicLogin__RenderFunc(props: {
                               className={classNames(
                                 projectcss.all,
                                 projectcss.__wab_text,
-                                sty.text__jDkVn
+                                sty.text__juu0Q
                               )}
                             >
                               {"P\u0159ihl\u00e1sti se"}
