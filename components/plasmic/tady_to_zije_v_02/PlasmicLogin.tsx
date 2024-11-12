@@ -62,14 +62,7 @@ import {
 import Header from "../../Header"; // plasmic-import: uZX7p1wyVbCa/component
 import { FormWrapper } from "@plasmicpkgs/antd5/skinny/Form";
 import { formHelpers as FormWrapper_Helpers } from "@plasmicpkgs/antd5/skinny/Form";
-
-// Conditionally import Login server-side only
-let Login;
-
-if (typeof window === 'undefined') {
-  Login = require('../../Login').Login; // Import server-side only
-}
-
+import { Login } from "../../Login"; // plasmic-import: 5Ay7Fc19l469/codeComponent
 import { FormItemWrapper } from "@plasmicpkgs/antd5/skinny/FormItem";
 import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
@@ -83,7 +76,6 @@ import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css";
 import plasmic_plasmic_rich_components_css from "../plasmic_rich_components/plasmic.module.css"; // plasmic-import: jkU633o1Cz7HrJdwdxhVHk/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: 7YxWRrh3dN23tQ7PqjX2hp/projectcss
 import sty from "./PlasmicLogin.module.css"; // plasmic-import: PlUFaVq0OU9N/css
-
 
 createPlasmicElementProxy;
 
@@ -423,7 +415,7 @@ function PlasmicLogin__RenderFunc(props: {
                           <FormItemWrapper
                             className={classNames(
                               "__wab_instance",
-                              sty.formField__ctutD
+                              sty.formField__r1BQ
                             )}
                             label={"P\u0159ihla\u0161ovac\u00ed e-mail"}
                             name={"email"}
@@ -440,7 +432,7 @@ function PlasmicLogin__RenderFunc(props: {
                           <FormItemWrapper
                             className={classNames(
                               "__wab_instance",
-                              sty.formField__ghKz5
+                              sty.formField__uRk2K
                             )}
                             label={"Heslo"}
                             name={"password"}
@@ -479,7 +471,7 @@ function PlasmicLogin__RenderFunc(props: {
                               className={classNames(
                                 projectcss.all,
                                 projectcss.__wab_text,
-                                sty.text___8Rffq
+                                sty.text__r8Vsp
                               )}
                             >
                               {"P\u0159ihl\u00e1sti se"}
