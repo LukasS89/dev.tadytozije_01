@@ -906,6 +906,12 @@
           "name": "Login",
           "displayName": "Login",
           "componentImportPath": "../components/Login"
+        },
+        {
+          "id": "xnChuxFbfwSr",
+          "name": "AuthGlobalContext",
+          "displayName": "AuthGlobalContext",
+          "componentImportPath": "../components/AuthGlobalContext"
         }
       ],
       "customFunctions": []
