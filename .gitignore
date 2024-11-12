@@ -37,3 +37,6 @@ next-env.d.ts
 
 # Ignore Login.tsx specifically
 /components/Login.tsx
+
+# Ignore Login.tsx specifically
+/components/plasmic/tady_to_zije_v_02/PlasmicLogin.tsx
