@@ -13,33 +13,22 @@ jobs:
       HOST: ssh.rosti.cz
       USER: app
       PORT: 10005
-      NODE_VERSION: 22.9.0
 
     steps:
       # Step 1: Checkout the GitHub repository to get the latest code
       - uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js (Install Node.js specified version)
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "v22.9.0"
-
-      # Step 3: Set up SSH key for server access
+      # Step 2: Set up SSH key for server access
       - uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: ${{ secrets.ROSTI_DEPLOY_SSH_KEY }}
 
-      # Step 4: Setup SSH known hosts to prevent connection issues
+      # Step 3: Setup SSH known hosts to prevent connection issues
       - name: Setup hostkey
         run: |
           echo "ssh.rosti.cz ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDUsNXCnANkKPlxYe//zFpV+N0s4Ay+2SEg8bTj+7iIJM8XbLviBYx0dIRb2DVD7kKjmIjCLijd6Pmn6g17jbGDUB/CMrJ+A+XcyDZYvGUDGzt0QcUksFoSFqJQo3u/MLr2pa3eyO34zfOS6M6nTCIvp48iNzQAdc5B9ziEaUbxiuiVru7UMVr2Rv12sFSarRacXCE4URsetXuZ077AzJ67ZKJYH1gU6QCk4qal8R9xrkDep4LmFSUTr1oKiNaLTJlrZ69N9+A+hJX6XdpZ7dIke+NbLaqTWJZq+esGQmF+SdsGoVtBM+8aQPyazxSJAQOB+j4pbOGrLlZFhfS6tqzx" > ./known_hosts
 
-      # Step 5: Install dependencies (node_modules)
-      - name: Dependencies
-        run: |
-          npm install
-
-      # Step 6: Copy code (sync repository to the server)
+      # Step 4: Copy code (sync repository to the server)
       - name: Copy code
         run: |
           rsync -ae "ssh -o UserKnownHostsFile=./known_hosts -p $PORT" \
@@ -48,7 +37,7 @@ jobs:
             --exclude=pages/plasmic-host.tsx \
             ./ $USER@$HOST:/srv/app/
 
-      # Step 7: Run the build command on the server
+      # Step 5: Run the build command on the server
       - name: Run build on server
         run: |
           ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST "cd /srv/app && npm run build"
