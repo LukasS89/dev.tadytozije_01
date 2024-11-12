@@ -62,10 +62,7 @@ import {
 import Header from "../../Header"; // plasmic-import: uZX7p1wyVbCa/component
 import { FormWrapper } from "@plasmicpkgs/antd5/skinny/Form";
 import { formHelpers as FormWrapper_Helpers } from "@plasmicpkgs/antd5/skinny/Form";
-
-// Dynamically import Login component (only on client-side)
-const Login = dynamic(() => import('../../Login').then(mod => mod.Login), { ssr: false });
-
+import { Login } from "../../Login"; // plasmic-import: 5Ay7Fc19l469/codeComponent
 import { FormItemWrapper } from "@plasmicpkgs/antd5/skinny/FormItem";
 import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
@@ -418,7 +415,7 @@ function PlasmicLogin__RenderFunc(props: {
                           <FormItemWrapper
                             className={classNames(
                               "__wab_instance",
-                              sty.formField__r1BQ
+                              sty.formField__nDxYr
                             )}
                             label={"P\u0159ihla\u0161ovac\u00ed e-mail"}
                             name={"email"}
@@ -435,7 +432,7 @@ function PlasmicLogin__RenderFunc(props: {
                           <FormItemWrapper
                             className={classNames(
                               "__wab_instance",
-                              sty.formField__uRk2K
+                              sty.formField___7TqP4
                             )}
                             label={"Heslo"}
                             name={"password"}
@@ -474,7 +471,7 @@ function PlasmicLogin__RenderFunc(props: {
                               className={classNames(
                                 projectcss.all,
                                 projectcss.__wab_text,
-                                sty.text__r8Vsp
+                                sty.text__p93R4
                               )}
                             >
                               {"P\u0159ihl\u00e1sti se"}
