@@ -358,24 +358,23 @@ function PlasmicHeader__RenderFunc(props: {
               onClick={async () => {
                 const $steps = {};
 
-                $steps["goToLogin"] =
-                  $ctx.isLogged === false
-                    ? (() => {
-                        const actionArgs = { destination: `/login` };
-                        return (({ destination }) => {
-                          if (
-                            typeof destination === "string" &&
-                            destination.startsWith("#")
-                          ) {
-                            document
-                              .getElementById(destination.substr(1))
-                              .scrollIntoView({ behavior: "smooth" });
-                          } else {
-                            __nextRouter?.push(destination);
-                          }
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
+                $steps["goToLogin"] = true
+                  ? (() => {
+                      const actionArgs = { destination: `/login` };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
                 if (
                   $steps["goToLogin"] != null &&
                   typeof $steps["goToLogin"] === "object" &&
@@ -392,9 +391,7 @@ function PlasmicHeader__RenderFunc(props: {
                   sty.text___7XUsD
                 )}
               >
-                <React.Fragment>
-                  {$ctx.isLogged ? "Můj účet" : "Přihlásit se"}
-                </React.Fragment>
+                {"P\u0159ihl\u00e1sit"}
               </div>
             </AntdButton>
           </AntdDropdown>
