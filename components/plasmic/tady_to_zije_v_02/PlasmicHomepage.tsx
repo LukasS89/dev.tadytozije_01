@@ -304,7 +304,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       sty.h1
                     )}
                   >
-                    {"UPDATE"}
+                    {"v Hav\u00ed\u0159ov\u011b a okol\u00ed"}
                   </h1>
                 </div>
                 <div className={classNames(projectcss.all, sty.freeBox__vHoqo)}>

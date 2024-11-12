@@ -905,7 +905,7 @@
           "id": "5Ay7Fc19l469",
           "name": "Login",
           "displayName": "Login",
-          "componentImportPath": "./components/Login"
+          "componentImportPath": "../components/Login"
         }
       ],
       "customFunctions": []
