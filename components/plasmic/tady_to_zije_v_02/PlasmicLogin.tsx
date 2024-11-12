@@ -62,7 +62,10 @@ import {
 import Header from "../../Header"; // plasmic-import: uZX7p1wyVbCa/component
 import { FormWrapper } from "@plasmicpkgs/antd5/skinny/Form";
 import { formHelpers as FormWrapper_Helpers } from "@plasmicpkgs/antd5/skinny/Form";
-import { Login } from "../../Login"; // plasmic-import: 5Ay7Fc19l469/codeComponent
+
+// Dynamically import Login component (only on client-side)
+const Login = dynamic(() => import('../../Login').then(mod => mod.Login), { ssr: false });
+
 import { FormItemWrapper } from "@plasmicpkgs/antd5/skinny/FormItem";
 import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
