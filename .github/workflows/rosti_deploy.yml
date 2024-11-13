@@ -41,4 +41,6 @@ jobs:
       # Step 5: Run the build command on the server
       - name: Run build on server
         run: |
-          ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST "cd /srv/app && npm run build"
+          ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST supervisorctl reread
+          ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST supervisorctl restart app
+          ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST supervisorctl restart nginx
