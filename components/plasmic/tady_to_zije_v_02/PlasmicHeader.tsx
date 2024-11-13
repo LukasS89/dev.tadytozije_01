@@ -357,7 +357,7 @@ function PlasmicHeader__RenderFunc(props: {
             })()}
             trigger={(() => {
               try {
-                return JSON.parse(localStorage.getItem("visitorData"))
+                return JSON.parse(localStorage.getItem("authTokens"))
                   ? "hover"
                   : false;
               } catch (e) {
@@ -417,7 +417,7 @@ function PlasmicHeader__RenderFunc(props: {
                 <React.Fragment>
                   {(() => {
                     try {
-                      return JSON.parse(localStorage.getItem("visitorData"))
+                      return JSON.parse(localStorage.getItem("authTokens"))
                         ? "Můj účet"
                         : "Přihlásit se";
                     } catch (e) {
