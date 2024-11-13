@@ -62,7 +62,7 @@ import {
 import Header from "../../Header"; // plasmic-import: uZX7p1wyVbCa/component
 import { FormWrapper } from "@plasmicpkgs/antd5/skinny/Form";
 import { formHelpers as FormWrapper_Helpers } from "@plasmicpkgs/antd5/skinny/Form";
-import { Login } from "../../../../components/Login"; // plasmic-import: 5Ay7Fc19l469/codeComponent
+import { Login } from "@components/Login"; // plasmic-import: 5Ay7Fc19l469/codeComponent
 import { FormItemWrapper } from "@plasmicpkgs/antd5/skinny/FormItem";
 import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
@@ -428,7 +428,7 @@ function PlasmicLogin__RenderFunc(props: {
                           <FormItemWrapper
                             className={classNames(
                               "__wab_instance",
-                              sty.formField__nGzgT
+                              sty.formField__bnGO
                             )}
                             label={"P\u0159ihla\u0161ovac\u00ed e-mail"}
                             name={"email"}
@@ -445,7 +445,7 @@ function PlasmicLogin__RenderFunc(props: {
                           <FormItemWrapper
                             className={classNames(
                               "__wab_instance",
-                              sty.formField___3I6Fk
+                              sty.formField__bPh5Q
                             )}
                             label={"Heslo"}
                             name={"password"}
@@ -484,7 +484,7 @@ function PlasmicLogin__RenderFunc(props: {
                               className={classNames(
                                 projectcss.all,
                                 projectcss.__wab_text,
-                                sty.text__esuib
+                                sty.text__efDrt
                               )}
                             >
                               {"P\u0159ihl\u00e1sti se"}

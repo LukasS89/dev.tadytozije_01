@@ -8,7 +8,7 @@ import * as React from "react";
 import { hasVariant, ensureGlobalVariants } from "@plasmicapp/react-web";
 import { AntdConfigProvider } from "@plasmicpkgs/antd5/skinny/registerConfigProvider";
 import { CmsCredentialsProvider } from "@plasmicpkgs/plasmic-cms";
-import AuthGlobalContext from "../../../../components/AuthGlobalContext"; // plasmic-import: SkhvxTne1n-r/codeComponent
+import AuthGlobalContext from "@components/AuthGlobalContext"; // plasmic-import: SkhvxTne1n-r/codeComponent
 
 export interface GlobalContextsProviderProps {
   children?: React.ReactElement;
