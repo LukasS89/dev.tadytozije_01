@@ -8,23 +8,30 @@ import * as React from "react";
 import { hasVariant, ensureGlobalVariants } from "@plasmicapp/react-web";
 import { AntdConfigProvider } from "@plasmicpkgs/antd5/skinny/registerConfigProvider";
 import { CmsCredentialsProvider } from "@plasmicpkgs/plasmic-cms";
+import AuthGlobalContext from "../../../../components/AuthGlobalContext"; // plasmic-import: SkhvxTne1n-r/codeComponent
 
 export interface GlobalContextsProviderProps {
   children?: React.ReactElement;
   antdConfigProviderProps?: Partial<
     Omit<React.ComponentProps<typeof AntdConfigProvider>, "children">
   >;
-
   cmsCredentialsProviderProps?: Partial<
     Omit<React.ComponentProps<typeof CmsCredentialsProvider>, "children">
+  >;
+  authGlobalContextProps?: Partial<
+    Omit<React.ComponentProps<typeof AuthGlobalContext>, "children">
   >;
 }
 
 export default function GlobalContextsProvider(
   props: GlobalContextsProviderProps
 ) {
-  const { children, antdConfigProviderProps, cmsCredentialsProviderProps } =
-    props;
+  const {
+    children,
+    antdConfigProviderProps,
+    cmsCredentialsProviderProps,
+    authGlobalContextProps
+  } = props;
 
   return (
     <AntdConfigProvider
@@ -144,7 +151,16 @@ export default function GlobalContextsProvider(
             : "Default"
         }
       >
-        {children}
+        <AuthGlobalContext
+          {...authGlobalContextProps}
+          authUrl={
+            authGlobalContextProps && "authUrl" in authGlobalContextProps
+              ? authGlobalContextProps.authUrl!
+              : ""
+          }
+        >
+          {children}
+        </AuthGlobalContext>
       </CmsCredentialsProvider>
     </AntdConfigProvider>
   );

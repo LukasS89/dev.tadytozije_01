@@ -350,7 +350,19 @@ function PlasmicHeader__RenderFunc(props: {
               };
               return __composite;
             })()}
-            trigger={"hover"}
+            trigger={(() => {
+              try {
+                return $ctx.isLogged ? "hover" : false;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return "hover";
+                }
+                throw e;
+              }
+            })()}
           >
             <AntdButton
               data-plasmic-name={"button"}

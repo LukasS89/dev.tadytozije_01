@@ -62,7 +62,7 @@ import {
 import Header from "../../Header"; // plasmic-import: uZX7p1wyVbCa/component
 import { FormWrapper } from "@plasmicpkgs/antd5/skinny/Form";
 import { formHelpers as FormWrapper_Helpers } from "@plasmicpkgs/antd5/skinny/Form";
-import { Login } from "@components/Login"; // plasmic-import: 5Ay7Fc19l469/codeComponent
+import { Login } from "../../../../components/Login"; // plasmic-import: 5Ay7Fc19l469/codeComponent
 import { FormItemWrapper } from "@plasmicpkgs/antd5/skinny/FormItem";
 import { AntdInput } from "@plasmicpkgs/antd5/skinny/registerInput";
 import { inputHelpers as AntdInput_Helpers } from "@plasmicpkgs/antd5/skinny/registerInput";
@@ -336,6 +336,33 @@ function PlasmicLogin__RenderFunc(props: {
                               "runActionOnForm"
                             ];
                           }
+
+                          $steps["goToHomepage"] = true
+                            ? (() => {
+                                const actionArgs = { destination: `/` };
+                                return (({ destination }) => {
+                                  if (
+                                    typeof destination === "string" &&
+                                    destination.startsWith("#")
+                                  ) {
+                                    document
+                                      .getElementById(destination.substr(1))
+                                      .scrollIntoView({ behavior: "smooth" });
+                                  } else {
+                                    __nextRouter?.push(destination);
+                                  }
+                                })?.apply(null, [actionArgs]);
+                              })()
+                            : undefined;
+                          if (
+                            $steps["goToHomepage"] != null &&
+                            typeof $steps["goToHomepage"] === "object" &&
+                            typeof $steps["goToHomepage"].then === "function"
+                          ) {
+                            $steps["goToHomepage"] = await $steps[
+                              "goToHomepage"
+                            ];
+                          }
                         },
                         onFinishFailed: async data => {
                           const $steps = {};
@@ -401,7 +428,7 @@ function PlasmicLogin__RenderFunc(props: {
                           <FormItemWrapper
                             className={classNames(
                               "__wab_instance",
-                              sty.formField__medN
+                              sty.formField___4Xr9H
                             )}
                             label={"P\u0159ihla\u0161ovac\u00ed e-mail"}
                             name={"email"}
@@ -418,7 +445,7 @@ function PlasmicLogin__RenderFunc(props: {
                           <FormItemWrapper
                             className={classNames(
                               "__wab_instance",
-                              sty.formField__wTzQt
+                              sty.formField__mjDja
                             )}
                             label={"Heslo"}
                             name={"password"}
@@ -457,7 +484,7 @@ function PlasmicLogin__RenderFunc(props: {
                               className={classNames(
                                 projectcss.all,
                                 projectcss.__wab_text,
-                                sty.text__vxlVt
+                                sty.text___4DS3
                               )}
                             >
                               {"P\u0159ihl\u00e1sti se"}
