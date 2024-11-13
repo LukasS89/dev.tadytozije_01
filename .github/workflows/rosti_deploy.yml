@@ -41,6 +41,11 @@ jobs:
       # Step 5: Run the build command on the server
       - name: Run build on server
         run: |
-          ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST supervisorctl reread
-          ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST supervisorctl restart app
-          ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST supervisorctl restart nginx
+          ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST "cd /srv/app && npm run build"
+
+      # Step 6: Reset things after the build is complete
+      - name: Reset server processes
+        run: |
+          ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST "supervisorctl reread"
+          ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST "supervisorctl restart app"
+          ssh -o UserKnownHostsFile=./known_hosts -p $PORT $USER@$HOST "supervisorctl restart nginx"
