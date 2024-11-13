@@ -375,21 +375,7 @@ function PlasmicHeader__RenderFunc(props: {
               data-plasmic-name={"button"}
               data-plasmic-override={overrides.button}
               className={classNames("__wab_instance", sty.button)}
-              disabled={(() => {
-                try {
-                  return JSON.parse(localStorage.getItem("visitorData"))
-                    ? false
-                    : true;
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return undefined;
-                  }
-                  throw e;
-                }
-              })()}
+              disabled={undefined}
               onClick={async () => {
                 const $steps = {};
 
