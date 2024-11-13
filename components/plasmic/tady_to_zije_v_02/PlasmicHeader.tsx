@@ -379,7 +379,9 @@ function PlasmicHeader__RenderFunc(props: {
               onClick={async () => {
                 const $steps = {};
 
-                $steps["goToLogin"] = true
+                $steps["goToLogin"] = (
+                  JSON.parse(localStorage.getItem("visitorData")) ? false : true
+                )
                   ? (() => {
                       const actionArgs = { destination: `/login` };
                       return (({ destination }) => {
