@@ -258,21 +258,7 @@ function PlasmicLogin__RenderFunc(props: {
                         sty.text__j22Dx
                       )}
                     >
-                      <React.Fragment>
-                        {(() => {
-                          try {
-                            return $ctx.isLogged;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return "Welcome to";
-                            }
-                            throw e;
-                          }
-                        })()}
-                      </React.Fragment>
+                      {"Welcome to"}
                     </div>
                     <h1
                       data-plasmic-name={"h1"}
@@ -442,7 +428,7 @@ function PlasmicLogin__RenderFunc(props: {
                           <FormItemWrapper
                             className={classNames(
                               "__wab_instance",
-                              sty.formField__mOYm
+                              sty.formField__n75Tl
                             )}
                             label={"P\u0159ihla\u0161ovac\u00ed e-mail"}
                             name={"email"}
@@ -459,7 +445,7 @@ function PlasmicLogin__RenderFunc(props: {
                           <FormItemWrapper
                             className={classNames(
                               "__wab_instance",
-                              sty.formField__otD2O
+                              sty.formField__qPwDh
                             )}
                             label={"Heslo"}
                             name={"password"}
@@ -498,7 +484,7 @@ function PlasmicLogin__RenderFunc(props: {
                               className={classNames(
                                 projectcss.all,
                                 projectcss.__wab_text,
-                                sty.text__pxB5U
+                                sty.text__wb9Dk
                               )}
                             >
                               {"P\u0159ihl\u00e1sti se"}

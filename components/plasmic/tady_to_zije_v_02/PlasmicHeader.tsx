@@ -60,6 +60,7 @@ import {
 } from "@plasmicapp/react-web/lib/host";
 
 import { AntdDropdown } from "@plasmicpkgs/antd5/skinny/registerDropdown";
+import { Logout } from "@components/Logout"; // plasmic-import: bOstTOy5OKvR/codeComponent
 import { AntdMenuItem } from "@plasmicpkgs/antd5/skinny/registerMenu";
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 
@@ -91,6 +92,7 @@ export type PlasmicHeader__OverridesType = {
   web5?: Flex__<"h2">;
   dropdown?: Flex__<typeof AntdDropdown>;
   button?: Flex__<typeof AntdButton>;
+  logout?: Flex__<typeof Logout>;
 };
 
 export interface DefaultHeaderProps {
@@ -332,7 +334,10 @@ function PlasmicHeader__RenderFunc(props: {
 
                 $steps["runActionOnLogout"] = true
                   ? (() => {
-                      const actionArgs = {};
+                      const actionArgs = {
+                        tplRef: "logout",
+                        action: "triggerLogout"
+                      };
                       return (({ tplRef, action, args }) => {
                         return $refs?.[tplRef]?.[action]?.(...(args ?? []));
                       })?.apply(null, [actionArgs]);
@@ -352,7 +357,7 @@ function PlasmicHeader__RenderFunc(props: {
             })()}
             trigger={(() => {
               try {
-                return $ctx.isLogged ? "hover" : false;
+                return $ctx.visitor === null ? false : "hover";
               } catch (e) {
                 if (
                   e instanceof TypeError ||
@@ -368,6 +373,19 @@ function PlasmicHeader__RenderFunc(props: {
               data-plasmic-name={"button"}
               data-plasmic-override={overrides.button}
               className={classNames("__wab_instance", sty.button)}
+              disabled={(() => {
+                try {
+                  return $ctx.visitor === null ? true : false;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return undefined;
+                  }
+                  throw e;
+                }
+              })()}
               onClick={async () => {
                 const $steps = {};
 
@@ -404,12 +422,34 @@ function PlasmicHeader__RenderFunc(props: {
                   sty.text___7XUsD
                 )}
               >
-                {"P\u0159ihl\u00e1sit"}
+                <React.Fragment>
+                  {(() => {
+                    try {
+                      return $ctx.visitor ? "Můj účet" : "Přihlásit se";
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return "P\u0159ihl\u00e1sit";
+                      }
+                      throw e;
+                    }
+                  })()}
+                </React.Fragment>
               </div>
             </AntdButton>
           </AntdDropdown>
         </div>
       </div>
+      <Logout
+        data-plasmic-name={"logout"}
+        data-plasmic-override={overrides.logout}
+        className={classNames("__wab_instance", sty.logout)}
+        ref={ref => {
+          $refs["logout"] = ref;
+        }}
+      />
     </section>
   ) as React.ReactElement | null;
 }
@@ -424,7 +464,8 @@ const PlasmicDescendants = {
     "web4",
     "web5",
     "dropdown",
-    "button"
+    "button",
+    "logout"
   ],
   framepost: ["framepost"],
   web: ["web"],
@@ -433,7 +474,8 @@ const PlasmicDescendants = {
   web4: ["web4"],
   web5: ["web5"],
   dropdown: ["dropdown", "button"],
-  button: ["button"]
+  button: ["button"],
+  logout: ["logout"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -448,6 +490,7 @@ type NodeDefaultElementType = {
   web5: "h2";
   dropdown: typeof AntdDropdown;
   button: typeof AntdButton;
+  logout: typeof Logout;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -518,6 +561,7 @@ export const PlasmicHeader = Object.assign(
     web5: makeNodeComponent("web5"),
     dropdown: makeNodeComponent("dropdown"),
     button: makeNodeComponent("button"),
+    logout: makeNodeComponent("logout"),
 
     // Metadata about props expected for PlasmicHeader
     internalVariantProps: PlasmicHeader__VariantProps,

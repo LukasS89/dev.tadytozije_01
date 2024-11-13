@@ -912,6 +912,12 @@
           "name": "AuthGlobalContext",
           "displayName": "AuthGlobalContext",
           "componentImportPath": "@components/AuthGlobalContext"
+        },
+        {
+          "id": "bOstTOy5OKvR",
+          "name": "Logout",
+          "displayName": "Logout",
+          "componentImportPath": "@components/Logout"
         }
       ],
       "customFunctions": []
