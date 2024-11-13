@@ -357,7 +357,9 @@ function PlasmicHeader__RenderFunc(props: {
             })()}
             trigger={(() => {
               try {
-                return $ctx.visitor === null ? false : "hover";
+                return JSON.parse(localStorage.getItem("visitorData"))
+                  ? "hover"
+                  : false;
               } catch (e) {
                 if (
                   e instanceof TypeError ||
@@ -375,7 +377,9 @@ function PlasmicHeader__RenderFunc(props: {
               className={classNames("__wab_instance", sty.button)}
               disabled={(() => {
                 try {
-                  return $ctx.visitor === null ? true : false;
+                  return JSON.parse(localStorage.getItem("visitorData"))
+                    ? false
+                    : true;
                 } catch (e) {
                   if (
                     e instanceof TypeError ||
@@ -425,7 +429,9 @@ function PlasmicHeader__RenderFunc(props: {
                 <React.Fragment>
                   {(() => {
                     try {
-                      return $ctx.visitor ? "Můj účet" : "Přihlásit se";
+                      return JSON.parse(localStorage.getItem("visitorData"))
+                        ? "Můj účet"
+                        : "Přihlásit se";
                     } catch (e) {
                       if (
                         e instanceof TypeError ||
